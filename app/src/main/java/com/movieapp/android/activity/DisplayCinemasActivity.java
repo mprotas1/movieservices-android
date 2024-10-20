@@ -1,7 +1,11 @@
 package com.movieapp.android.activity;
 
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,17 +13,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.movieapp.android.R;
 import com.movieapp.android.adapter.CinemaAdapter;
 import com.movieapp.android.model.Cinema;
+import com.movieapp.android.service.CinemaApi;
+import com.movieapp.android.ui.CinemasRecyclerView;
 
 import java.util.List;
 import java.util.UUID;
 
-class DisplayCinemasActivity extends AppCompatActivity {
+public class DisplayCinemasActivity extends AppCompatActivity {
     private final String TAG = "DisplayCinemasActivity";
-    //private final CinemaApi cinemaApi;
-
-    public DisplayCinemasActivity() {
-        //this.cinemaApi = new CinemaApi();
-    }
+    private final List<Cinema> templateCinemas = List.of(new Cinema(UUID.randomUUID(), "Multikino Szczecin", "Szczecin"),
+            new Cinema(UUID.randomUUID(), "Multikino Warszawa", "Warszawa"),
+            new Cinema(UUID.randomUUID(), "Multikino Wrocław", "Wrocław"),
+            new Cinema(UUID.randomUUID(), "Multikino Kraków", "Kraków"),
+            new Cinema(UUID.randomUUID(), "Multikino Gdańsk", "Gdańsk"),
+            new Cinema(UUID.randomUUID(), "Multikino Poznań", "Poznań"),
+            new Cinema(UUID.randomUUID(), "Multikino Łódź", "Łódź"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,37 +35,10 @@ class DisplayCinemasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_cinemas);
         RecyclerView recyclerView = findViewById(R.id.display_cinemas_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        List<Cinema> cinemas = List.of(new Cinema(UUID.randomUUID(), "Multikino Szczecin", "Szczecin"),
-                                       new Cinema(UUID.randomUUID(), "Multikino Warszawa", "Warszawa"),
-                                       new Cinema(UUID.randomUUID(), "Multikino Wrocław", "Wrocław"));
-        CinemaAdapter adapter = new CinemaAdapter(cinemas);
+        CinemaAdapter adapter = new CinemaAdapter(templateCinemas, cinema -> {
+            Toast.makeText(this, cinema.getName() + " : " + cinema.getId(), Toast.LENGTH_SHORT).show();
+        });
         recyclerView.setAdapter(adapter);
     }
 
-    /*
-    private List<Cinema> getCinemas() {
-        Call<List<Cinema>> cinemas = cinemaApi.getCinemas();
-        List<Cinema> result = new ArrayList<>();
-        cinemas.enqueue(new Callback<List<Cinema>>() {
-            @Override
-            public void onResponse(Call<List<Cinema>> call, Response<List<Cinema>> response) {
-                if(response.body() != null && response.isSuccessful()) {
-                    List<Cinema> cinemasBody = response.body();
-                    Log.d(TAG, String.format("Successfully fetched %d cinemas", cinemasBody.size()));
-                    result.addAll(cinemasBody);
-                    return;
-                }
-
-                throw new RuntimeException("Failed to fetch cinemas");
-            }
-
-            @Override
-            public void onFailure(Call<List<Cinema>> call, Throwable t) {
-                throw new RuntimeException("Failed to fetch cinemas");
-            }
-        });
-        return result;
-    }
-
-     */
 }

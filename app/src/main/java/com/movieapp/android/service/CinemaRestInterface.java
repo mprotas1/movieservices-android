@@ -5,9 +5,7 @@ import com.movieapp.android.model.Cinema;
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.http.GET;
 
-public interface CinemaService {
-    @GET("cinemas")
+public interface CinemaRestInterface {
     Call<List<Cinema>> getCinemas();
 }
