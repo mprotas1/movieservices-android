@@ -1,22 +1,18 @@
 package com.movieapp.android.service;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.movieapp.android.model.AuthenticationRequest;
 import com.movieapp.android.model.AuthenticationResponse;
-
-import java.io.IOException;
+import com.movieapp.android.model.RegisterRequest;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AuthenticationClient {
     private final String TAG = "AuthenticationClient";
-    private final String API_URL = "http://localhost:8080/users/";
+    private final String API_URL = "http://10.0.2.2:8080/";
     private final AuthenticationService authenticationService;
 
     public AuthenticationClient() {
@@ -27,15 +23,14 @@ public class AuthenticationClient {
                 .create(AuthenticationService.class);
     }
 
-    public String authenticate(AuthenticationRequest request) throws IOException {
-        Log.d(TAG, "Authenticating user");
-        Call<AuthenticationResponse> call = authenticationService.authenticate(request);
-
-        return "";
+    public Call<AuthenticationResponse> authenticate(AuthenticationRequest request) {
+        Log.d(TAG, "Authenticating user with email: " + request.getEmail());
+        return authenticationService.authenticate(request);
     }
 
-    public String register() {
-        return "";
+    public Call<AuthenticationResponse> register(RegisterRequest request) {
+        Log.d(TAG, "Registering user with email: " + request.getEmail());
+        return authenticationService.register(request);
     }
 
 }

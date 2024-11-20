@@ -21,7 +21,6 @@
         android:id="@+id/email_register_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:ems="10"
         android:hint="@string/register_password_hint"
 
@@ -31,17 +30,19 @@
         app:layout_constraintHorizontal_bias="0.194"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_register_input"
-        app:layout_constraintVertical_bias="0.23" />
+        app:layout_constraintVertical_bias="0.35" />
 
     <EditText
         android:id="@+id/email_register_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginBottom="11dp"
         android:ems="10"
-        android:hint="@string/register_email_hint"
 
+        android:hint="@string/register_email_hint"
         android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/email_register_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.194"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,28 +52,29 @@
         android:id="@+id/first_name_register_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
         android:ems="10"
-        android:hint="@string/register_first_name_hint"
 
+        android:hint="@string/register_first_name_hint"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/last_name_register_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.194"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_register_password" />
 
     <EditText
         android:id="@+id/last_name_register_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp"
         android:ems="10"
+
         android:hint="@string/register_last_name_hint"
         android:inputType="text"
-
+        app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.194"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="458dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button2"
@@ -84,8 +86,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.125"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/last_name_register_input"
-        app:layout_constraintVertical_bias="0.958" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
