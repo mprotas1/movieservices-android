@@ -7,10 +7,13 @@ public class Cinema {
     private String name;
     private String address;
 
-    public Cinema(UUID id, String name, String address) {
+    private LocationPosition location;
+
+    public Cinema(UUID id, String name, String address, LocationPosition location) {
         this.id = id;
         this.name = name;
         this.address = address;
+        this.location = location;
     }
 
     public UUID getId() {
@@ -35,6 +38,14 @@ public class Cinema {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public LocationPosition getLocation() {
+        return location;
+    }
+
+    public void setLocation(LocationPosition location) {
+        this.location = location;
     }
 
 }

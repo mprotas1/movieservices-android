@@ -35,8 +35,6 @@ class CinemaViewHolder extends ViewHolder {
 
     public void setCinemaAddressText(String address) {
         this.cinemaAddress.setText(address);
-
-
     }
 
 }
