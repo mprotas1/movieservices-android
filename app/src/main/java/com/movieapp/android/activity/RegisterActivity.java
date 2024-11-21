@@ -14,6 +14,7 @@ import com.movieapp.android.model.AuthenticationResponse;
 import com.movieapp.android.model.RegisterRequest;
 import com.movieapp.android.service.AuthenticationClient;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -71,9 +72,12 @@ public class RegisterActivity extends AppCompatActivity {
             registerCall.enqueue(new Callback<AuthenticationResponse>() {
                 @Override
                 public void onResponse(Call<AuthenticationResponse> call, Response<AuthenticationResponse> response) {
+
+
                     if(!response.isSuccessful()) {
                         Log.e(TAG, "Failed to register user: " + response.errorBody());
-                        Toast.makeText(RegisterActivity.this, "Failed to register user", Toast.LENGTH_SHORT).show();
+                        ResponseBody responseBody = response.errorBody();
+                        Toast.makeText(RegisterActivity.this, responseBody.toString(), Toast.LENGTH_SHORT).show();
                         return;
                     }
 

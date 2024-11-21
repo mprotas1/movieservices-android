@@ -28,7 +28,6 @@ import retrofit2.Response;
 
 public class DisplayCinemasActivity extends AppCompatActivity {
     private final String TAG = "DisplayCinemasActivity";
-    private CinemaAdapter adapter;
     private final List<Cinema> cinemas = new ArrayList<>();
     private LocationPosition position;
 
@@ -38,8 +37,7 @@ public class DisplayCinemasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_cinemas);
         initRecyclerView();
         fetchCinemas();
-
-        LocationPosition location = getLocation();
+        getLocation();
     }
 
     private LocationPosition getLocation() {
@@ -54,6 +52,7 @@ public class DisplayCinemasActivity extends AppCompatActivity {
 
                     for(Cinema cinema : cinemas) {
                         double distance = HaversineDistanceCalculator.calculate(position, cinema.getLocation());
+                        Log.d(TAG, "Distance to " + cinema.getName() + " is: " + distance);
                     }
 
                     List<Cinema> sorted = cinemas.stream()
@@ -69,7 +68,7 @@ public class DisplayCinemasActivity extends AppCompatActivity {
     }
 
     private void initRecyclerView() {
-        adapter = new CinemaAdapter(cinemas, cinema -> {
+        CinemaAdapter adapter = new CinemaAdapter(cinemas, cinema -> {
             Intent intent = new Intent(this, ShowCinemaScreeningsActivity.class);
             startActivity(intent);
         });
