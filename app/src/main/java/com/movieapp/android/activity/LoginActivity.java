@@ -68,8 +68,8 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                     String token = authenticationResponse.getToken();
-                    Toast.makeText(LoginActivity.this, "Login successful! \nToken: " + token, Toast.LENGTH_LONG).show();
                     applyTokenToCache(token);
+                    goToCinemasActivity();
                 }
 
                 @Override
@@ -79,6 +79,12 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         });
+    }
+
+    private void goToCinemasActivity() {
+        Intent cinemasActivity = new Intent(LoginActivity.this, DisplayCinemasActivity.class);
+        cinemasActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(cinemasActivity);
     }
 
     private void setUpNotRegisteredButton(Button notRegisteredButton) {
